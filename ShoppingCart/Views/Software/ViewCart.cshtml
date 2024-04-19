@@ -106,9 +106,7 @@
             var totalElement = document.getElementById("total")
             var tvalue = parseInt(totalElement.innerText);
 
-            var newvalue = tvalue - price;
-
-            totalElement.innerText = newvalue;
+            totalElement.innerText = Math.max(0, tvalue - price);
 
             updateQuantity(softwareId, "decrease");
         }

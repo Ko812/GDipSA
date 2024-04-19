@@ -69,16 +69,16 @@ namespace ShoppingCart.Controllers
                     break;
                 }
             }
-            int totalSoftware = Convert.ToInt32((string)HttpContext.Session.GetString("CartCount"));
+            int totalSoftware = GetCartCount();
             if (todo == "decrease")
             {
                 HttpContext.Session.Remove($"soft{softwareKey}");
-                HttpContext.Session?.SetString("CartCount", (totalSoftware - 1).ToString());
+                HttpContext.Session?.SetInt32("CartCount", totalSoftware - 1);
 
             } else if(todo == "increase")
             {
                 HttpContext.Session.SetString($"soft{totalSoftware + 1}",softwareId);
-                HttpContext.Session?.SetString("CartCount", (totalSoftware + 1).ToString());
+                HttpContext.Session?.SetInt32("CartCount", totalSoftware + 1);
             }
             return View();
         }
