@@ -84,13 +84,13 @@
             
         @{
             IEnumerable<string>? softKeys = HttpContextAccessor.HttpContext?.Session.Keys.Where((k) => k.StartsWith("soft"));
-            Debug.WriteLine("Writing debug in Load {0}", softKeys?.Count());
+            
             if (softKeys != null)
                 {
                     foreach (string k in softKeys)
                     {
                         string? softId = HttpContextAccessor.HttpContext?.Session.GetString(k);
-                    Debug.WriteLine($"softid {softId}");
+                    
                         if(softId != null)
                         {
                             @:softwareToPurchase.push(@softId);

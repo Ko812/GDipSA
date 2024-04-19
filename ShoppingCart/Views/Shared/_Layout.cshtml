@@ -27,14 +27,18 @@
                 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Software" asp-action="Index">Gallery</a>
-                        </li>
                         @if (HttpContextAccessor.HttpContext?.Session.GetString("username") != null)
                         {
                             <li class="nav-item">
                                 <span class="text-dark nav-link" asp-area="" id="usernameTag">Welcome @HttpContextAccessor.HttpContext?.Session.GetString("username")!</span>
                             </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Software" asp-action="Index">Gallery</a>
+                        </li>
+                        @if (HttpContextAccessor.HttpContext?.Session.GetString("username") != null)
+                        {
+                            
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="/Software/PastPurchase">My Purchases</a>
                             </li>
@@ -68,13 +72,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    <script>
-        window.onload = function () {
-
-            // Login logic
-            
-
-        }
-    </script>
+    
 </body>
 </html>

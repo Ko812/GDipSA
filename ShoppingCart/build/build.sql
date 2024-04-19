@@ -18,6 +18,7 @@
 -- INSERT INTO User (UserID, Username, FirstName, LastName) VALUES ("4", "SunSun", "Jiahao", "S");
 -- INSERT INTO User (UserID, Username, FirstName, LastName) VALUES ("5", "YanYan", "Nan", "Y");
 -- INSERT INTO User (UserID, Username, FirstName, LastName) VALUES ("6", "Xixi", "Haoxi", "D");
+-- INSERT INTO User (UserID, Username, FirstName, LastName) VALUES ("7", "Soso", "HanHan", "H");
 
 -- SELECT * FROM User;
 -- Set sql_safe_updates = 0;
@@ -62,3 +63,13 @@ SELECT * FROM Purchase;
 -- INSERT INTO PurchaseSoftware (PurchaseId, SoftwareId, ActivationCode, PurchaseStatus) VALUES ('7', '10', 'c8bc73fe-b1f4-4736-8c4a-e7e3fc53276c', 'Completed');
 -- SELECT * FROM PurchaseSoftware;
 use shoppingcart;
+select * from purchase where userid = "4";
+select * from purchasesoftware where purchaseid in ('3','11');
+-- DELETE from PurchaseSoftware Where PurchaseId in ('8','9');
+-- DELETE from Purchase Where PurchaseId in ('8','9');
+
+SELECT * FROM PurchaseSoftware WHERE PurchaseId in ('2','7','8');
+select * from purchasesoftware a 
+inner join software b on a.softwareid=b.softwareid 
+inner join purchase c on c.purchaseid=a.purchaseid
+where c.userId = '3'

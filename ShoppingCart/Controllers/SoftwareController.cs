@@ -48,13 +48,39 @@ namespace ShoppingCart.Controllers
             int cartCount = HttpContext.Session.GetInt32("CartCount") ?? 0;
             HttpContext.Session.SetInt32("CartCount", cartCount + 1);
             HttpContext.Session.SetString($"soft{cartCount + 1}", softwareId);
-            Debug.WriteLine("software id {1}: {0}", softwareId, cartCount + 1);
+            
             int count = 1;
             foreach(var k in HttpContext.Session.Keys.Where((k)=>k.StartsWith("soft")))
             {
                 count++;
             }
             return View("Index", db.GetAllSoftware());
+        }
+
+        public IActionResult EditQuantity(string todo, string softwareId)
+        {
+            List<string> softKeys = HttpContext.Session.Keys.Where((k) => k.StartsWith("soft")).ToList();
+            int softwareKey = 0;
+            for(int i = 0; i < softKeys.Count; i++)
+            {
+                if (HttpContext.Session.GetString(softKeys[i]) == softwareId)
+                {
+                    softwareKey = i + 1;
+                    break;
+                }
+            }
+            int totalSoftware = Convert.ToInt32((string)HttpContext.Session.GetString("CartCount"));
+            if (todo == "decrease")
+            {
+                HttpContext.Session.Remove($"soft{softwareKey}");
+                HttpContext.Session?.SetString("CartCount", (totalSoftware - 1).ToString());
+
+            } else if(todo == "increase")
+            {
+                HttpContext.Session.SetString($"soft{totalSoftware + 1}",softwareId);
+                HttpContext.Session?.SetString("CartCount", (totalSoftware + 1).ToString());
+            }
+            return View();
         }
 
         private int GetCartCount()
@@ -66,13 +92,10 @@ namespace ShoppingCart.Controllers
         public IActionResult ViewCart(string? softwareToPurchase)
         {
             softwareToPurchase ??= "";
-            Debug.WriteLine("Session saving {0}",HttpContext.Session.GetString("soft1"));
+            
             List<string> softwareStrings = softwareToPurchase.Split(",").Where((s) => !string.IsNullOrEmpty(s)).ToList();
             PurchaseCart pc = BuildPurchaseCart(softwareStrings);
-            //for(int i = 1;i < pc.softwareList.Count;i++)
-            //{
-            //    HttpContext.Session.SetString($"soft{i}", softwareStrings[i]);
-            //}
+            
             return View("ViewCart", pc);
         }
 

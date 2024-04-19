@@ -45,10 +45,22 @@ namespace ShoppingCart.Controllers
             HttpContext.Session.SetString("username", user.username);
             if(HttpContext.Session.Keys.Contains("checking-out"))
             {
-                return RedirectToAction("Checkout", "Software");
+                string softwareStrings = GetSoftwareIdsInCart(); 
+                return RedirectToAction("ViewCart", "Software", new { softwareToPurchase = softwareStrings});
             }
 
             return RedirectToAction("Index", "Software", user);
+        }
+
+        private string GetSoftwareIdsInCart()
+        {
+            IEnumerable<string> sessionKeys = HttpContext.Session.Keys.Where((k) => k.StartsWith("soft"));
+            string softwareStrings = "";
+            foreach (string k in sessionKeys)
+            {
+                softwareStrings = softwareStrings + "," + HttpContext.Session.GetString(k);
+            }
+            return softwareStrings;
         }
 
         public IActionResult Logout()
