@@ -59,33 +59,48 @@ namespace ShoppingCart.Controllers
 
         public IActionResult EditQuantity(string todo, string softwareId)
         {
-            List<string> softKeys = HttpContext.Session.Keys.Where((k) => k.StartsWith("soft")).ToList();
-            int softwareKey = 0;
-            for(int i = 0; i < softKeys.Count; i++)
-            {
-                if (HttpContext.Session.GetString(softKeys[i]) == softwareId)
-                {
-                    softwareKey = i + 1;
-                    break;
-                }
-            }
-            int totalSoftware = GetCartCount();
             if (todo == "decrease")
             {
+                List<string> softKeys = HttpContext.Session.Keys.Where((k) => k.StartsWith("soft")).ToList();
+                int softwareKey = 0;
+                for (int i = 0; i < softKeys.Count; i++)
+                {
+                    if (HttpContext.Session.GetString(softKeys[i]) == softwareId)
+                    {
+                        softwareKey = i + 1;
+                        break;
+                    }
+                }
                 HttpContext.Session.Remove($"soft{softwareKey}");
-                HttpContext.Session?.SetInt32("CartCount", totalSoftware - 1);
+                HttpContext.Session?.SetInt32("CartCount", Math.Max(GetCartCount() - 1, 0));
 
             } else if(todo == "increase")
             {
-                HttpContext.Session.SetString($"soft{totalSoftware + 1}",softwareId);
-                HttpContext.Session?.SetInt32("CartCount", totalSoftware + 1);
+                int lastSoftKey = GetLastSoftKey();
+                HttpContext.Session.SetString($"soft{lastSoftKey + 1}",softwareId);
+                HttpContext.Session?.SetInt32("CartCount", lastSoftKey + 1);
             }
             return View();
         }
 
         private int GetCartCount()
         {
-            return HttpContext.Session.GetInt32("CartCount") ?? 0;
+            return HttpContext.Session.Keys.Where((k) => k.StartsWith("soft")).Count();
+        }
+
+        private int GetLastSoftKey()
+        {
+            int lastSoftKey = 0;
+            ICollection<string> col = HttpContext.Session.Keys.Where((k) => k.StartsWith("soft")).ToHashSet();
+            foreach(string k in col)
+            {
+                int currentKey = Convert.ToInt32(k.Substring(4));
+                if (currentKey > lastSoftKey)
+                {
+                    lastSoftKey = currentKey;
+                }
+            }
+            return lastSoftKey;
         }
 
         [HttpGet]
@@ -95,7 +110,6 @@ namespace ShoppingCart.Controllers
             
             List<string> softwareStrings = softwareToPurchase.Split(",").Where((s) => !string.IsNullOrEmpty(s)).ToList();
             PurchaseCart pc = BuildPurchaseCart(softwareStrings);
-            
             return View("ViewCart", pc);
         }
 

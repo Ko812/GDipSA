@@ -59,11 +59,18 @@
 
 
     /* Image styling */
-    .grid-item img {
-        max-width: 100%; /* Ensure images don't exceed container width */
-        height: auto; /* Maintain aspect ratio */
-    }
+.grid-item img {
+    max-width: 100%; /* Ensure images don't exceed container width */
+    height: auto; /* Maintain aspect ratio */
+}
 
 .border-1 {
     border: 1px solid black;
+}
+
+.view-cart-nav{
+    width: 280px;
+    display: flex;
+    justify-content: space-around;
+    font-family: Arial;
 }

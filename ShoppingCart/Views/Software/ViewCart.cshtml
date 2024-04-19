@@ -27,12 +27,10 @@
         <style>
             .link-button
         </style>
-        <nav>
-            <ul style="list-style: none; padding: 0; display: inline;">
-                <li><button onclick="goTo('/software/index')" class="btn btn-secondary">Continue Shopping</button></li>
-                <li><button onclick="goTo('/software/checkout')'" class="btn btn-secondary">Checkout</button></li>
-            </ul>
-        </nav>
+        <div class="view-cart-nav">
+            <button onclick="goTo('/software/index')" class="btn">Continue Shopping</button>
+            <button onclick="goTo('/software/checkout')" class="btn text-white" style="background-color:forestgreen">Checkout</button>
+        </div>
 
         <div class="total">
             Total: $
@@ -119,6 +117,7 @@
         }
 
         function goTo(url) { 
+            console.log(`${url}`);
             window.location.href = url;
         }
 
