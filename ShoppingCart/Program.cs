@@ -1,6 +1,6 @@
 using ShoppingCart.Models;
 using ShoppingCart.Models.EF;
-using ShoppingCart.Models.Middleware;
+
 
 namespace ShoppingCart
 {
