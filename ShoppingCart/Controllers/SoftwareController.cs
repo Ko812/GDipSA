@@ -15,21 +15,7 @@ namespace ShoppingCart.Controllers
         public IActionResult Index(User user)
         {
             ViewData["username"] = user.username;
-            foreach(var k in HttpContext.Session.Keys)
-            {
-                var v = HttpContext.Session.GetString(k);
-            }
             return View(db.GetAllSoftware());
-        }
-
-        public IActionResult Reviews()
-        {
-            return View();
-        }
-
-        public IActionResult ViewCart_2()
-        {
-            return View(new List<ShoppingcartModel>() { new ShoppingcartModel("1", (decimal)1.0, (decimal)1.0, (decimal)1.0, "/images/numerics.jpg", "item") });
         }
 
         [HttpPost]
@@ -40,8 +26,6 @@ namespace ShoppingCart.Controllers
             return View("Index", result);
         }
 
-        
-
         [HttpGet]
         public IActionResult AddToCart([FromQuery] string softwareId)
         {
@@ -50,7 +34,7 @@ namespace ShoppingCart.Controllers
             HttpContext.Session.SetString($"soft{cartCount + 1}", softwareId);
             
             int count = 1;
-            foreach(var k in HttpContext.Session.Keys.Where((k)=>k.StartsWith("soft")))
+            foreach(var k in HttpContext.Session.Keys.Where((k) => k.StartsWith("soft")))
             {
                 count++;
             }
@@ -80,7 +64,7 @@ namespace ShoppingCart.Controllers
                 HttpContext.Session.SetString($"soft{lastSoftKey + 1}",softwareId);
                 HttpContext.Session?.SetInt32("CartCount", lastSoftKey + 1);
             }
-            return View();
+            return View("ViewCart", BuildPurchaseCart());
         }
 
         private int GetCartCount()

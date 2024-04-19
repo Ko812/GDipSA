@@ -70,8 +70,6 @@ namespace ShoppingCart.Controllers
             ViewData["username"] = null;
             return View("Index");
         }
-
-        
     }
 
     public class LoginResult

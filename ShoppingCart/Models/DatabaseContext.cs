@@ -5,7 +5,7 @@ using System.Reflection.PortableExecutable;
 
 namespace ShoppingCart.Models
 {
-    public class DatabaseContext : IDbContext
+    public class DatabaseContext
     {
         MySqlConnection con {  get; set; }
         public DatabaseContext() 

@@ -1,17 +1,14 @@
-# CREATE DATABASE ShoppingCart;
-# use ShoppingCart;
+-- CREATE DATABASE ShoppingCart;
+-- use ShoppingCart;
 
-# CREATE TABLE User (UserID VARCHAR(10), Username VARCHAR(30), HashedPass VARCHAR(80), FirstName VARCHAR(50), LastName VARCHAR(50), PRIMARY KEY(UserID));
-# DROP Table User;
+-- CREATE TABLE User (UserID VARCHAR(10), Username VARCHAR(30), HashedPass VARCHAR(80), FirstName VARCHAR(50), LastName VARCHAR(50), PRIMARY KEY(UserID));
 
-# CREATE TABLE Software (SoftwareID VARCHAR(10), SoftwareName VARCHAR(50), Descr VARCHAR(200), Price DECIMAL(2), ImageURL VARCHAR(40), PRIMARY KEY(SoftwareID));
-# DROP TABLE Software;
+-- CREATE TABLE Software (SoftwareID VARCHAR(10), SoftwareName VARCHAR(50), Descr VARCHAR(200), Price DECIMAL(2), ImageURL VARCHAR(40), PRIMARY KEY(SoftwareID));
 
-# CREATE TABLE Purchase (PurchaseID VARCHAR(10), UserId VARCHAR(10), DateOfPurchase DateTime, PRIMARY KEY (PurchaseID), FOREIGN KEY(UserID) REFERENCES User(UserID));
-# DROP Table Purchase;
+-- CREATE TABLE Purchase (PurchaseID VARCHAR(10), UserId VARCHAR(10), DateOfPurchase DateTime, PRIMARY KEY (PurchaseID), FOREIGN KEY(UserID) REFERENCES User(UserID));
 
-# CREATE TABLE PurchaseSoftware (PurchaseID VARCHAR(10), SoftwareID VARCHAR(10), ActivationCode VARCHAR(36), PurchaseStatus VARCHAR(12), PRIMARY KEY(PurchaseID, SoftwareID, ActivationCode), FOREIGN KEY(PurchaseID) REFERENCES Purchase(PurchaseID), FOREIGN KEY(SoftwareID) REFERENCES Software(SoftwareID));
-# DROP Table PurchaseSoftware;
+-- CREATE TABLE PurchaseSoftware (PurchaseID VARCHAR(10), SoftwareID VARCHAR(10), ActivationCode VARCHAR(36), PurchaseStatus VARCHAR(12), PRIMARY KEY(PurchaseID, SoftwareID, ActivationCode), FOREIGN KEY(PurchaseID) REFERENCES Purchase(PurchaseID), FOREIGN KEY(SoftwareID) REFERENCES Software(SoftwareID));
+
 -- INSERT INTO User (UserID, Username, FirstName, LastName) VALUES ("1", "VanVan", "Vani", "B");
 -- INSERT INTO User (UserID, Username, FirstName, LastName) VALUES ("2", "NamNam", "Poonam", "K");
 -- INSERT INTO User (UserID, Username, FirstName, LastName) VALUES ("3", "Keke", "Kevin", "O");
@@ -44,8 +41,7 @@
 -- INSERT INTO Purchase (PurchaseId, UserId, DateOfPurchase) VALUES ("5", "6", '2024-02-25');
 -- INSERT INTO Purchase (PurchaseId, UserId, DateOfPurchase) VALUES ("6", "5", '2024-03-25');
 -- INSERT INTO Purchase (PurchaseId, UserId, DateOfPurchase) VALUES ("7", "3", '2024-03-25');
-SELECT * FROM Purchase;
--- DELETE FROM Purchase Where PurchaseId in ('8','9','10');
+-- SELECT * from Purchase;
 
 -- INSERT INTO PurchaseSoftware (PurchaseId, SoftwareId, ActivationCode, PurchaseStatus) VALUES ('1', '2', '61633e3a-1457-49b1-a281-18b0921617c1', 'Completed');
 -- INSERT INTO PurchaseSoftware (PurchaseId, SoftwareId, ActivationCode, PurchaseStatus) VALUES ('1', '4', '6d6ffc20-4b4a-44fa-97c2-a250b4d80d33', 'Completed');
@@ -62,14 +58,3 @@ SELECT * FROM Purchase;
 -- INSERT INTO PurchaseSoftware (PurchaseId, SoftwareId, ActivationCode, PurchaseStatus) VALUES ('7', '9', 'bf278667-4c49-4886-bbd8-dbe36807b37b', 'Completed');
 -- INSERT INTO PurchaseSoftware (PurchaseId, SoftwareId, ActivationCode, PurchaseStatus) VALUES ('7', '10', 'c8bc73fe-b1f4-4736-8c4a-e7e3fc53276c', 'Completed');
 -- SELECT * FROM PurchaseSoftware;
-use shoppingcart;
-select * from purchase where userid = "4";
-select * from purchasesoftware where purchaseid in ('3','11');
--- DELETE from PurchaseSoftware Where PurchaseId in ('8','9');
--- DELETE from Purchase Where PurchaseId in ('8','9');
-
-SELECT * FROM PurchaseSoftware WHERE PurchaseId in ('2','7','8');
-select * from purchasesoftware a 
-inner join software b on a.softwareid=b.softwareid 
-inner join purchase c on c.purchaseid=a.purchaseid
-where c.userId = '3'

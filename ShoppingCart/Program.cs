@@ -31,7 +31,6 @@ namespace ShoppingCart
             app.UseRouting();
             app.UseAuthorization();
             app.UseSession();
-            //app.UseMiddleware<LoginStatusCheck>();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Software}/{action=Index}/{id?}");
