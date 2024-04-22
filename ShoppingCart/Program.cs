@@ -1,5 +1,4 @@
 using ShoppingCart.Models;
-using ShoppingCart.Models.EF;
 
 
 namespace ShoppingCart
