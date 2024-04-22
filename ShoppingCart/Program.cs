@@ -14,7 +14,7 @@ namespace ShoppingCart
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
             builder.Services.AddSingleton<DatabaseContext>();
-            builder.Services.AddDbContext<MyDbContext>();
+            
             builder.Services.AddHttpContextAccessor();
             var app = builder.Build();
 
