@@ -9,11 +9,10 @@ namespace ShoppingCart.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly MyDbContext db;
-        public HomeController(ILogger<HomeController> logger, MyDbContext db)
+
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            this.db = db;
         }
 
         public IActionResult Index()
