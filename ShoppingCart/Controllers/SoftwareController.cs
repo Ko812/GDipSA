@@ -161,9 +161,7 @@ namespace ShoppingCart.Controllers
             string? username = session.GetString("username");
             if (username != null)
             {
-                var purchases = db.GetPastPurchase2(username);
-
-                return View(purchases);
+                return View(db.GetPastPurchase2(username));
             }
             return View();
         }

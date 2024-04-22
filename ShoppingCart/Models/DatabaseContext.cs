@@ -179,6 +179,7 @@ where c.userId = (Select UserId FROM User where username = @username)";
             {
                 con.Close();
             }
+            purchases.Sort((p1, p2) => p1.lastdateOfPurchase < p2.lastdateOfPurchase ? -1 : (p1.lastdateOfPurchase == p2.lastdateOfPurchase ? 0 : 1));
             return purchases;
         }
 
