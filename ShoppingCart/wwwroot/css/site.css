@@ -42,10 +42,11 @@
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    grid-auto-rows: auto; /* Automatically size rows */
+    grid-auto-rows: max-content; /* Automatically size rows */
     gap: 20px; /* Gap between grid items */
     width: 60%; /* Set the width of the container */
     margin: 0 auto; /* Center the container horizontally */
+    min-width: 760px;
 }
 
 

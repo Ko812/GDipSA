@@ -107,14 +107,12 @@
         }
 
         function loadViewCart() {
-            console.log('running load');
             var totalElement = document.getElementById("total")
             var totalPrice = '@Html.Raw(Model.GetPurchaseCartPrice())';
             totalElement.innerText = totalPrice;
         }
 
         function goTo(url) { 
-            console.log(`${url}`);
             window.location.href = url;
         }
 
